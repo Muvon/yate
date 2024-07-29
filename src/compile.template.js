@@ -10,7 +10,6 @@ function(pool) {
 	};
 
 	let root = document.createDocumentFragment();
-	let n0;
 
 	function createDom() {
 		if (!root.childNodes.length) {

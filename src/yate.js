@@ -48,7 +48,23 @@ const yate = (() => {
 		}
 	};
 
-	return { pool, renderChildren, renderChild };
+	const renderWhen = (template, node, data, pool, children) => {
+		if (data && data.length) {
+			if (children.length === 0) {
+				const nested = pool.get(template);
+				children.push(nested);
+				node.parentNode.insertBefore(nested.dom(), node);
+				nested.update(data);
+			} else {
+				children[0].update(data);
+			}
+		} else {
+			if (children.length > 0) {
+				pool.release(template, children.pop());
+			}
+		}
+	};
+	return { pool, renderChildren, renderChild, renderWhen };
 })();
 
 // For browser environments
@@ -60,3 +76,4 @@ if (typeof window !== 'undefined') {
 if (typeof module !== 'undefined' && module.exports) {
 	module.exports = yate;
 }
+

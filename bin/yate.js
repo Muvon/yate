@@ -2,7 +2,7 @@
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
-import build from './../build.js';
+import build from './../src/build.js';
 
 const args = process.argv.slice(2);
 const files = [];
@@ -32,7 +32,7 @@ for (const arg of args) {
 
 if (files.length > 0) {
 	if (asBundle) {
-		const scriptPath = resolve(__dirname, '..', 'yate.js');
+		const scriptPath = resolve(__dirname, '..', 'src', 'yate.js');
 
 		try {
 			const content = fs.readFileSync(scriptPath, { encoding: 'utf8' });

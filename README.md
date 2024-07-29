@@ -1,159 +1,81 @@
-YATE
-======
+# YATE - Yet Another Template Engine
 
-YATE is tool for using html templates as JS files with DOM rendered elements and special helper to manipulate real time data updates.
+YATE is a lightweight and efficient template engine for JavaScript applications. It allows you to compile HTML-based templates into JavaScript functions for fast rendering.
 
-## Installing
-To install YATE you have to just run npm in your project dir:
+## Features
 
-```bash
-npm install yate ---save-dev
-```
+- HTML-based template syntax
+- Compiles templates to JavaScript functions
+- Supports both browser and Node.js environments
+- Asynchronous file processing
+- Modular output for easy integration
 
-## Usage
-### Sample usage with bin tool
-You have test.html example template. To build it just use yate bin tool:
-
-```bash
-./bin/yate.js examples/simple.yat > templates.js
-```
-
-Now merge yate.js lib with generated template
-
-```bash
-cat ./yate.js templates.js > bundle.js
-```
-
-Well you can do same as above with one command:
-
-```bash
-./bin/yate.js examples/simple.yat -b > bundle.js
-```
-
-Finally require in browser just created the bundle.js file.
-You got yate variable defined with template pool manipulation helpers and templates variable with your template.
-
-Now just get rendered DOM and append to any element. The key of template same as file name without extension.
-
-```javascript
-var t = templates.get('simple');
-document.body.appendChild(t.dom());
-```
-
-Wanna update some parameters? Easy:
-
-```javascript
-t.update({welcome_text: 'YATE works!'});
-```
-
-Now you can see rendered test template on your screen.
-
-### Usage with webpack or whatever
-First install loader for webpack. Instruction read here: (https://www.npmjs.com/package/yate-loader).
-
-Install stuff:
+## Installation
 
 ```bash
 npm install yate
-npm install yate-loader
 ```
 
-Somewhere in your code write to render
+## Usage
+
+### Node.js
 
 ```javascript
-# First require dependencies
-var yate = require('yate');
-var simple_tpl = require('examples/simple.yat');
+const yate = require('yate');
+const compile = require('yate/compile');
 
-# Make pool of templates, really only one now
-var pool = yate.pool(simple_tpl);
-
-# Fetch template and render
-var t = pool.get('simple')
-document.body.appendChild(t.dom());
-t.update({welcome_text: 'YATE works!'});
+// Compile templates
+compile(['template1.html', 'template2.html'], true)
+  .then((compiledTemplates) => {
+    // Use compiled templates
+    const templates = yate.pool(compiledTemplates);
+    const result = templates.template1({ data: 'example' });
+    console.log(result);
+  })
+  .catch((error) => {
+    console.error('Compilation error:', error);
+  });
 ```
 
-Build your project and enjoy!
-
-## Template markup
-You can use only simple constructs in your html template.
-
-### Variables
-Just use {{ var_name }} in attribute or inside element to make it works.
-```html
-<div title="{{ title }}">{{ body }}</div>
-```
-
-### Iteration
-When making iteration inside template YATE switching context inside iterated object. So only possible to access object variables of current iterated item.
-
-```json
-{
-    "rows": [
-        {"value": 1},
-        {"value": 2}
-    ]
-}
-```
+### Browser
 
 ```html
-<div for="rows">
-    The value is: {{ value }}
-</div>
+<script src="yate.js"></script>
+<script src="compiled-templates.js"></script>
+<script>
+  // Use compiled templates
+  const result = window.templates.template1({ data: 'example' });
+  console.log(result);
+</script>
 ```
 
-You know what will be as result? :)
+## API
 
-### Condition
-Condition switches context as iteration. Its same easy to use.
+### `compile(files, asModule)`
 
-```json
-{
-    "first": false,
-    "second": {
-        "value": 2
-    }
-}
-```
+Compiles the specified template files.
 
-```html
-{first}
-    <div>
-        First block wont appear here
-    </div>
-{/first}
-{second}
-    <div>
-        In context of second condition: {value}
-    </div>
-{/second}
-```
+- `files`: A single file path or an array of file paths to compile.
+- `asModule`: Boolean indicating whether to output as a Node.js module (true) or browser-ready code (false).
 
-## Template pool methods
-### get(template, data)
-Return template object from pool of available templates using the template key.
+Returns a Promise that resolves to the compiled template code.
 
-- *template* - name of template. If your template name as mytemplate.yat it must be mytemplate (without extension).
-- *data* - optional. Pass data to render your template as object.
+### `yate.pool(templateList)`
 
-### release(template, instance)
-It releases generate template from DOM tree
+Creates a pool of compiled templates.
 
-- *template* - name of template.
-- *instance* - generated Node of this template.
+- `templateList`: An object containing compiled template functions.
 
-## Template object methods
-When you get template from created pool, it has several methods to manipulate it.
+Returns an object with methods to render the compiled templates.
 
-### dom()
-The method returns generated DOM tree for current template as DocumentFragment (see document.createDocumentFragment).
+## Template Syntax
 
-### update(data)
-- *data* - object to update and rerender current loaded template's DOM.
+YATE uses HTML-based syntax for templates. Detailed documentation on the template syntax will be provided separately.
 
-### remove()
-This method removes rendered element from DOM tree.
+## Contributing
 
-## Loaders for YATE
-Webpack: (https://www.npmjs.com/package/yate-loader).
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

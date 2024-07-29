@@ -1,8 +1,8 @@
 <div>
-	{first}
-    First block active! And it has context name: {name}.
-	{/first}
-	{second}
-    Second block active! And it has the context name: {name}. 
-	{/second}
+  <div if="first">
+    First block active! And it has context name: {{ name }}.
+  </div>
+  <div if="second">
+    Second block active! And it has the context name: {{ name }}.
+  </div>
 </div>

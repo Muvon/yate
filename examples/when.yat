@@ -1,0 +1,6 @@
+<div when="rows">
+	<p for="rows">
+		The row with value {{ value }}
+	</p>
+</div>
+
