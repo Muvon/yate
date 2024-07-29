@@ -1,0 +1,37 @@
+{
+  "name": "yate",
+  "version": "0.1.0",
+  "description": "Yet Another Template Engine",
+  "type": "module",
+  "main": "build.js",
+  "browser": "yate.js",
+	"bin": {
+		"yate": "bin/yate.js"
+	},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Muvon/yate.git"
+  },
+  "keywords": [
+    "dom",
+    "template",
+    "html",
+    "xml",
+    "render",
+    "yate",
+    "simple",
+    "kiss"
+  ],
+  "author": "Muvon Un Limited <hello@muvon.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Muvon/yate/issues"
+  },
+  "homepage": "https://github.com/Muvon/yate#readme",
+  "dependencies": {
+    "xmldom": "^0.6.0"
+  }
+}

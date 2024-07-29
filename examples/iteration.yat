@@ -1,0 +1,5 @@
+{rows}
+	<div>
+		The row with value {value} 
+	</div>
+{/rows}
