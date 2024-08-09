@@ -1,5 +1,5 @@
 {
-  "name": "yate",
+  "name": "@muvon/yate",
   "version": "0.1.0",
   "description": "Yet Another Template Engine",
   "type": "module",
@@ -8,12 +8,12 @@
   "bin": {
     "yate": "bin/yate.js"
   },
-	"exports": {
-		".": "./src/yate.js"
-	},
+  "exports": {
+    ".": "./src/yate.js"
+  },
   "scripts": {
-		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
-	},
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Muvon/yate.git"
@@ -39,5 +39,9 @@
   },
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "directories": {
+    "example": "examples",
+    "test": "test"
   }
 }
