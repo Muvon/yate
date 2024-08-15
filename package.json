@@ -2,6 +2,9 @@
 	"name": "@muvon/yate",
 	"version": "0.1.0",
 	"description": "Yet Another Template Engine",
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
 	"main": "build.js",
 	"browser": "yate.js",
